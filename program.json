@@ -1,5 +1,5 @@
 {
-  "program": "tomiwa_auction_bidder.aleo",
+  "program": "auction_the_highest_bid.aleo",
   "version": "0.1.0",
   "description": "",
   "license": "MIT",
