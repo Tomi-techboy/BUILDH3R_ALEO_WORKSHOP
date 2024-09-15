@@ -1,6 +1,5 @@
-// The 'tomiwa_auction_bidder' program.
-program tomiwa_auction_bidder.aleo {
-  // The 'auction_the_highest_bid' program.
+// The 'auction_the_highest_bid' program.
+program auction_the_highest_bid.aleo {
     // A bid in an auction.
     // - `owner`     : The address of the account that owns the record associated with this bid.
     //                 This is separate from the address of the account that placed the bid.
@@ -31,7 +30,7 @@ program tomiwa_auction_bidder.aleo {
         assert_eq(self.caller, bidder);
         // Return a new 'Bid' record for the auction bidder.
         return Bid {
-            owner: aleo1pl7smpduljkxzyjh5lumjj0delrhxgr5mzn947fmw7xdjrpgwcysrmcrtt,
+            owner: aleo1cew3qr2wk7p4aeaqynjxph2449l8s59ky5wcm6083xcst5hgm5gq0zncvc,
             bidder: bidder,
             amount: amount,
             is_winner: false,
@@ -46,7 +45,7 @@ program tomiwa_auction_bidder.aleo {
     // In the event of a tie, the first bid is selected.
     transition resolve(first: Bid, second: Bid) -> Bid {
         // Ensure the caller is the auctioneer.
-        assert_eq(self.caller, aleo1pl7smpduljkxzyjh5lumjj0delrhxgr5mzn947fmw7xdjrpgwcysrmcrtt);
+        assert_eq(self.caller, aleo1cew3qr2wk7p4aeaqynjxph2449l8s59ky5wcm6083xcst5hgm5gq0zncvc);
         // Resolve the winner of the auction.
         if (first.amount >= second.amount) {
             return first;
@@ -61,7 +60,7 @@ program tomiwa_auction_bidder.aleo {
     // Assumes that the function is invoked only after all bids have been resolved.
     transition finish(bid: Bid) -> Bid {
         // Ensure the caller is the auctioneer.
-        assert_eq(self.caller, aleo1pl7smpduljkxzyjh5lumjj0delrhxgr5mzn947fmw7xdjrpgwcysrmcrtt);
+        assert_eq(self.caller, aleo1cew3qr2wk7p4aeaqynjxph2449l8s59ky5wcm6083xcst5hgm5gq0zncvc);
         // Return 'is_winner' as 'true' in the winning 'Bid'.
         return Bid {
             owner: bid.bidder,
@@ -73,7 +72,7 @@ program tomiwa_auction_bidder.aleo {
 
     // claim the prize with the winning bid.
     transition claim (bid:Bid) -> Prize {
-        assert_eq(self.caller, aleo1pl7smpduljkxzyjh5lumjj0delrhxgr5mzn947fmw7xdjrpgwcysrmcrtt);
+        assert_eq(self.caller, aleo1cew3qr2wk7p4aeaqynjxph2449l8s59ky5wcm6083xcst5hgm5gq0zncvc);
 
         assert(bid.is_winner);
 
@@ -84,4 +83,3 @@ program tomiwa_auction_bidder.aleo {
     
     }
 }
-
